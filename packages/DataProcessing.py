@@ -49,7 +49,7 @@ class tfrecords:
 
         image = tf.image.resize_with_pad(image, self.IMG_HEIGHT, self.IMG_WIDTH)
         image = tf.cast(image, 'uint8')
-        image = tf.io.encode_jpeg(image)
+        image = tf.io.encode_png(image)
 
         feature = {
             'label': self._bytes_feature(label),
@@ -61,7 +61,7 @@ class tfrecords:
 
         image = tf.image.resize_with_pad(image, self.IMG_HEIGHT, self.IMG_WIDTH)
         image = tf.cast(image, 'uint8')
-        image = tf.io.encode_jpeg(image)
+        image = tf.io.encode_png(image)
 
         feature = {
             'image_raw': self._bytes_feature(image),
@@ -100,7 +100,7 @@ class tfrecords:
         img_raw = example_message['image_raw']
         label = example_message['label']
         
-        image = tf.io.decode_jpeg(img_raw)
+        image = tf.io.decode_png(img_raw)
         image = tf.reshape(image, shape=[self.IMG_HEIGHT, self.IMG_WIDTH, 1])
 
         label = tf.io.decode_raw(label, tf.int32)
@@ -116,7 +116,7 @@ class tfrecords:
 
         img_raw = example_message['image_raw']
 
-        image = tf.io.decode_jpeg(img_raw)
+        image = tf.io.decode_png(img_raw)
         image = tf.reshape(image, shape=[self.IMG_HEIGHT, self.IMG_WIDTH, 1])
 
         return image

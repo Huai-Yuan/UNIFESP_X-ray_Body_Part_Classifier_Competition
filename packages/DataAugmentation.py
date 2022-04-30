@@ -7,11 +7,14 @@ class dataAugmentation:
 
         self.transforms = album.Compose([
             album.HorizontalFlip(p=0.5),
-            album.Rotate(limit=20, border_mode=cv2.BORDER_CONSTANT, p=0.5),
+            album.ShiftScaleRotate(shift_limit=0.125, 
+                                   scale_limit=0.1, 
+                                   rotate_limit=20, 
+                                   border_mode=cv2.BORDER_CONSTANT, p=0.5),
             album.OneOf([
                 album.RandomBrightnessContrast(brightness_limit=0.1, 
-                                               contrast_limit=0.1, p=0.5),
-                album.RandomGamma(p=0.5),
+                                               contrast_limit=0., p=0.5),
+                album.RandomGamma(gamma_limit=(80, 120), p=0.5),
                 ], p=0.5),
             album.OneOf([
                 album.Blur(p=0.1),
@@ -23,7 +26,7 @@ class dataAugmentation:
                 album.GridDropout(ratio=0.5, p=0.2),
                 album.CoarseDropout(max_holes=16, max_height=16, max_width=16,
                                     min_holes= 8, min_height= 8, min_width= 8, p=0.2)
-                ], p=0.2),
+                ], p=0.5),
             ])
 
     def aug_fn(self, image):
