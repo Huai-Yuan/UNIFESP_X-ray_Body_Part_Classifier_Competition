@@ -9,4 +9,8 @@ Classifying a body part from an x-ray image might seem silly, but having it auto
 ![figure_1](./docs/readme/images/figure_1.png)
 
 ## planning
+Strategy 1
 ![Strategy_1](./docs/readme/images/Strategy1.png)
+
+Strategy 2
+![Strategy_1](./docs/readme/images/Strategy2.png)
