@@ -33,8 +33,10 @@ class tfrecords:
         img = ds.pixel_array
         if ds.PhotometricInterpretation == 'MONOCHROME1':
             img = np.invert(img)
-        img = (img/(2**ds.BitsAllocated - 1)*255).astype('uint8')
+        img = img/(2**ds.BitsAllocated - 1)*255
         img = img - img.min()
+        img = img / img.max() * 255
+        img = img.astype('uint8')
         img = np.expand_dims(img, axis=-1)
         return img
 

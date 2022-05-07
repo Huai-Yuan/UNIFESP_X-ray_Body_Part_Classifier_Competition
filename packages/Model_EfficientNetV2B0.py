@@ -11,7 +11,7 @@ def get_model(input_shape, output_shape):
     x = base_model(x)
     x = tf.keras.layers.GlobalAveragePooling2D()(x)
     # Dense
-    x = tf.keras.layers.Dropout(0.3)(x)
+    x = tf.keras.layers.Dropout(0.5)(x)
     outputs = tf.keras.layers.Dense(output_shape, activation="sigmoid", dtype='float32')(x)
 
     model = tf.keras.Model(inputs, outputs)
